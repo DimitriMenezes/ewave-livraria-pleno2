@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EwaveLivraria.API", "EwaveLivraria.API\EwaveLivraria.API.csproj", "{0FF715E8-50EE-4AB7-8E64-C0CD8747A0BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EwaveLivraria.Domain", "EwaveLivraria.Domain\EwaveLivraria.Domain.csproj", "{71176E60-4392-4A3C-9715-D59FD98FA663}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EwaveLivraria.Services", "EwaveLivraria.Services\EwaveLivraria.Services.csproj", "{891FE65C-0EF5-4E82-9826-BD6B363DEBCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EwaveLivraria.Data", "EwaveLivraria.Data\EwaveLivraria.Data.csproj", "{4675F99E-439E-416C-8437-0B3EEC6CC2F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EwaveLivraria.HostedServices", "EwaveLivraria.HostedServices\EwaveLivraria.HostedServices.csproj", "{1D89265C-2C52-4322-AB7C-B5581D2FD580}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EwaveLivraria.Tests", "EwaveLivraria.Tests\EwaveLivraria.Tests.csproj", "{1EB8A15D-96B9-4BA1-825D-EA16C02819F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FF715E8-50EE-4AB7-8E64-C0CD8747A0BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF715E8-50EE-4AB7-8E64-C0CD8747A0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF715E8-50EE-4AB7-8E64-C0CD8747A0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF715E8-50EE-4AB7-8E64-C0CD8747A0BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71176E60-4392-4A3C-9715-D59FD98FA663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71176E60-4392-4A3C-9715-D59FD98FA663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71176E60-4392-4A3C-9715-D59FD98FA663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71176E60-4392-4A3C-9715-D59FD98FA663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{891FE65C-0EF5-4E82-9826-BD6B363DEBCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{891FE65C-0EF5-4E82-9826-BD6B363DEBCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{891FE65C-0EF5-4E82-9826-BD6B363DEBCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{891FE65C-0EF5-4E82-9826-BD6B363DEBCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4675F99E-439E-416C-8437-0B3EEC6CC2F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4675F99E-439E-416C-8437-0B3EEC6CC2F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4675F99E-439E-416C-8437-0B3EEC6CC2F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4675F99E-439E-416C-8437-0B3EEC6CC2F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D89265C-2C52-4322-AB7C-B5581D2FD580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D89265C-2C52-4322-AB7C-B5581D2FD580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D89265C-2C52-4322-AB7C-B5581D2FD580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D89265C-2C52-4322-AB7C-B5581D2FD580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB8A15D-96B9-4BA1-825D-EA16C02819F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB8A15D-96B9-4BA1-825D-EA16C02819F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB8A15D-96B9-4BA1-825D-EA16C02819F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB8A15D-96B9-4BA1-825D-EA16C02819F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95DF4AD4-2613-4D5D-A90D-B301F48C838F}
+	EndGlobalSection
+EndGlobal

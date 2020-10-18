@@ -46,12 +46,22 @@ namespace EwaveLivraria.Services.Concrete
             if(admin == null)
                 return new ReturnModel { Errors = "Administrador Não existe" };
 
-            if(admin.Password != PasswordService.GeneratePassword(request.Password))           
-                admin.Password = PasswordService.GeneratePassword(admin.Password);
-
-            admin.Name = request.Name;
-            var result = await _administratorRepository.Update(admin);
+            var result = await UpdateEntity(admin, request);
             return new ReturnModel { Data = _mapper.Map<AdministratorModel>(result) };
+        }
+
+        private async Task<Administrator> UpdateEntity(Administrator entity, AdministratorRequest newEntity)
+        {
+            if (entity.Password != PasswordService.GeneratePassword(newEntity.Password))
+                entity.Password = PasswordService.GeneratePassword(newEntity.Password);
+
+            if(entity.Name != newEntity.Name)
+                entity.Name = newEntity.Name;
+
+            if (entity.Email != newEntity.Email)
+                entity.Email = newEntity.Email;
+
+            return await _administratorRepository.Update(entity);
         }
     }
 }

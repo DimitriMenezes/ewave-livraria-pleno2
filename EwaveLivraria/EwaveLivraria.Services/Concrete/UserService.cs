@@ -56,13 +56,7 @@ namespace EwaveLivraria.Services.Concrete
 
             var user = await _userRepository.GetByCpf(request.Cpf);
 
-            user.Email = request.Email;
-            user.Name = request.Name;
-            user.InstitutionId = institution.Id;
-            if (user.Password != PasswordService.GeneratePassword(request.Password))
-                user.Password = PasswordService.GeneratePassword(user.Password);
-
-            var result = await _userRepository.Update(user);
+            var result = await UpdateEntity(user, request);
 
             return new ReturnModel { Data = _mapper.Map<UserModel>(result) };
         }
@@ -91,6 +85,22 @@ namespace EwaveLivraria.Services.Concrete
 
             var result = await _userRepository.Update(user);
             return new ReturnModel { Data = _mapper.Map<UserModel>(result) };
+        }
+
+        private async Task<User> UpdateEntity(User entity, UserRequest newEntity)
+        {
+            if (entity.Name != newEntity.Name)
+                entity.Name = newEntity.Name;
+            if (entity.InstitutionId != newEntity.InstitutionId)
+                entity.InstitutionId = newEntity.InstitutionId;
+            if (entity.Password != PasswordService.GeneratePassword(newEntity.Password))
+                entity.Password = PasswordService.GeneratePassword(newEntity.Password);
+            if (entity.Phone != newEntity.Phone)
+                entity.Phone = newEntity.Phone;
+            if (entity.Email != entity.Email)
+                entity.Email = entity.Email;
+
+            return await _userRepository.Update(entity);
         }
     }
 }

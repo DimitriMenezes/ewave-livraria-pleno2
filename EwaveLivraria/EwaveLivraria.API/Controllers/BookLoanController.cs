@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EwaveLivraria.Services.Abstract;
+using EwaveLivraria.Services.Model.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,42 +14,65 @@ namespace EwaveLivraria.API.Controllers
     [Route("v1/[controller]")]
     public class BookLoanController : ControllerBase
     {
+        private readonly IBookLoanService _bookLoanService;
+
+        public BookLoanController(IBookLoanService bookLoanService)
+        {
+            _bookLoanService = bookLoanService;
+        }
+
         //Como Administrador
         //Quero Obter Listagem de todos os empréstimos
         //Com filtros: Usuário, Título do Livro, Status do Empréstimo
         [HttpGet]
-        [Route("testeadmsdfsdfs")]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetAllBookLoans()
-        {            
-            return Ok();
+        [Route("")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> GetAllBookLoans(BookLoanSearchRequest request)
+        {
+
+            var result = await _bookLoanService.FilterBookLoans(request);
+            if (result.Errors != null)
+                return BadRequest(result.Errors);
+            return Ok(result.Data);
         }
 
         //Dado Que Sou Administrador
         //Quero Visualizar a situação de um empréstimo
         [HttpGet]
-        [Route("b")]
+        [Route("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> GetBookLoan(int id)
-        {            
-            return Ok();
+        {
+            var result = await _bookLoanService.GetBookLoan(id);
+            if (result.Errors != null)
+                return BadRequest(result.Errors);
+            return Ok(result.Data);
         }
 
         //Como Administrador
         //Quero Cadastrar emprestimo de um Livro para Um Usuário
         [HttpPost]
-        [Route("a")]
-        public async Task<ActionResult> LoanBookToUser()
+        [Route("")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> LoanBookToUser(BookLoanRequest request)
         {
-            return Ok();
+            var result = await _bookLoanService.CreateBookLoan(request);
+            if (result.Errors != null)
+                return BadRequest(result.Errors);
+            return Ok(result.Data);
         }
 
         //Como Administrador
         //Quero registrar devolução de livro
         [HttpPost]
-        [Route("return")]
-        public async Task<ActionResult> BookReturn()
+        [Route("{id}/return")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> BookReturn(int id)
         {
-            return Ok();
+            var result = await _bookLoanService.ReturnBook(id);
+            if (result.Errors != null)
+                return BadRequest(result.Errors);
+            return Ok(result.Data);
         }
 
         //Como Usuário
@@ -55,10 +80,13 @@ namespace EwaveLivraria.API.Controllers
         //Para depois pegar emprestado
         [HttpPost]
         [Route("reservation")]
-        public async Task<ActionResult> BookReservation()
+        [Authorize(Roles = "User")]
+        public async Task<ActionResult> BookReservation(BookLoanRequest request)
         {
-            return Ok();
-        }    
-
+            var result = await _bookLoanService.BookReservation(request);
+            if (result.Errors != null)
+                return BadRequest(result.Errors);
+            return Ok(result.Data);
+        }
     }
 }

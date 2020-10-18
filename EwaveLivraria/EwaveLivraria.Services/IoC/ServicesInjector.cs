@@ -10,11 +10,13 @@ namespace EwaveLivraria.Services.IoC
     public static class ServicesInjector
     {
         public static void RegisterServices(IServiceCollection services)
-        {
-            services.AddScoped<IUserService, UserService>();
+        {            
             services.AddScoped<IAdministratorService, AdministratorService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IInstitutionService, InstitutionService>();
+            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IBookLoanService, BookLoanService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

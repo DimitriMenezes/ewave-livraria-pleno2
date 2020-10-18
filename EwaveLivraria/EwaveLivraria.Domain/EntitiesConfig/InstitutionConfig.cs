@@ -11,8 +11,12 @@ namespace EwaveLivraria.Domain.EntitiesConfig
     {
         public void Configure(EntityTypeBuilder<Institution> builder)
         {
-            builder.HasKey(c => new { c.Id });           
-            
+            builder.HasKey(c => new { c.Id });
+
+            builder
+                .HasIndex(c => c.Cnpj)
+                .IsUnique();
+
             builder
                 .Property(i => i.Cnpj)
                 .HasColumnType("varchar(14)")

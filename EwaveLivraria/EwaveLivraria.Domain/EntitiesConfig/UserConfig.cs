@@ -14,6 +14,10 @@ namespace EwaveLivraria.Domain.EntitiesConfig
             builder.HasKey(c => new { c.Id });
 
             builder
+                .HasIndex(c => c.Cpf)
+                .IsUnique();
+
+            builder
                 .HasOne(i => i.Institution)
                 .WithMany(i => i.User)
                 .HasForeignKey(i => i.InstitutionId)

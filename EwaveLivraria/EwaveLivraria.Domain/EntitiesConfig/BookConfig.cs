@@ -12,6 +12,14 @@ namespace EwaveLivraria.Domain.EntitiesConfig
         public void Configure(EntityTypeBuilder<Book> builder)
         {
             builder.HasKey(c => new { c.Id });
+            builder
+                .HasIndex(c => c.Isbn)
+                .IsUnique();
+
+            builder
+               .Property(i => i.Isbn)
+               .HasColumnType("varchar(13)")
+               .IsRequired(true);
 
             builder
                .Property(i => i.Author)

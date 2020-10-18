@@ -9,6 +9,7 @@ namespace EwaveLivraria.Domain.Model
     [Table("Book")]
     public class Book : Base
     {        
+        public string Isbn { get; set; }
         public string Title { get; set; }
         public string Genre { get; set; }
         public string Author { get; set; }

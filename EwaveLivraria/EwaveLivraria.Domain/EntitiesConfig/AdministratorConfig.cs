@@ -11,7 +11,11 @@ namespace EwaveLivraria.Domain.EntitiesConfig
     {
         public void Configure(EntityTypeBuilder<Administrator> builder)
         {
-            builder.HasKey(c => new { c.Id });           
+            builder.HasKey(c => new { c.Id });
+
+            builder
+                .HasIndex(c => c.Cpf)
+                .IsUnique();
 
             builder
                 .Property(i => i.Email)

@@ -8,6 +8,7 @@ namespace EwaveLivraria.Data.Repositories.Abstract
 {
     public interface IAdministratorRepository : IBaseRepository<Administrator>
     {
+        Task<Administrator> GetByCpf(string cpf);
         Task<Administrator> GetByEmail(string email);
     }
 }

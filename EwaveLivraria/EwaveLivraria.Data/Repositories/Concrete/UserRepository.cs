@@ -15,6 +15,11 @@ namespace EwaveLivraria.Data.Repositories.Concrete
         {
         }
 
+        public async Task<User> GetByCpf(string cpf)
+        {
+            return await _dbSet.FirstOrDefaultAsync(i => i.Cpf == cpf);
+        }
+
         public async Task<User> GetByEmail(string email)
         {
             return await _dbSet.FirstOrDefaultAsync(i => i.Email == email);

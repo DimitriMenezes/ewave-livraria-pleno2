@@ -4,6 +4,7 @@ using EwaveLivraria.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +16,15 @@ namespace EwaveLivraria.Data.Repositories.Concrete
         {
         }
 
+        public override IQueryable<User> Include()
+        {
+            return _dbSet
+               .Include(c => c.Institution);
+        }
+
         public async Task<User> GetByCpf(string cpf)
         {
-            return await _dbSet.FirstOrDefaultAsync(i => i.Cpf == cpf);
+            return await Include().FirstOrDefaultAsync(i => i.Cpf == cpf);
         }
 
         public async Task<User> GetByEmail(string email)

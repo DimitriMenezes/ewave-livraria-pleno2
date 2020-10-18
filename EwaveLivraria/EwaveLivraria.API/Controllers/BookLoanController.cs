@@ -14,20 +14,11 @@ namespace EwaveLivraria.API.Controllers
     {
         //Como Administrador
         //Quero Obter Listagem de todos os empréstimos
+        //Com filtros: Usuário, Título do Livro, Status do Empréstimo
         [HttpGet]
         [Route("testeadmsdfsdfs")]
         [AllowAnonymous]
         public async Task<ActionResult> GetAllBookLoans()
-        {            
-            return Ok();
-        }
-
-        //Como Administrador
-        //Quero Obter Listagem de Empréstimos de um Determinado Usuário
-        [HttpGet]
-        [Route("{userId}")]
-        [AllowAnonymous]
-        public async Task<ActionResult> GetAllBookLoansOfUser(int userId)
         {            
             return Ok();
         }
@@ -42,7 +33,7 @@ namespace EwaveLivraria.API.Controllers
         }
 
         //Como Administrador
-        //Quero Reservar um Livro para Um Usuário
+        //Quero Cadastrar emprestimo de um Livro para Um Usuário
         [HttpPost]
         [Route("a")]
         public async Task<ActionResult> LoanBookToUser()
@@ -50,22 +41,24 @@ namespace EwaveLivraria.API.Controllers
             return Ok();
         }
 
-
         //Como Administrador
-        //Quero Obter Listagem de Usuários
-        [HttpGet]
-        public async Task<ActionResult> GetUsers()
+        //Quero registrar devolução de livro
+        [HttpPost]
+        [Route("return")]
+        public async Task<ActionResult> BookReturn()
         {
             return Ok();
         }
 
         //Como Usuário
         //Quero Reservar um Livro
+        //Para depois pegar emprestado
         [HttpPost]
         [Route("reservation")]
         public async Task<ActionResult> BookReservation()
         {
             return Ok();
-        }
+        }    
+
     }
 }

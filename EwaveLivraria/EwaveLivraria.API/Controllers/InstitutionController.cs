@@ -60,7 +60,7 @@ namespace EwaveLivraria.API.Controllers
         }
 
         //Como Administrador ou Usuario
-        //Quero visualizar todas Instituições
+        //Quero visualizar uma instituição
         [HttpGet]
         [Route("{id}")]
         [Authorize(Roles = "Administrator, User")]
@@ -72,7 +72,7 @@ namespace EwaveLivraria.API.Controllers
         }
 
         //Como Administrador ou Usuario
-        //Quero visualizar uma instituição
+        //Quero visualizar todas Instituições
         [HttpGet]        
         [Authorize(Roles = "Administrator, User")]
         public async Task<ActionResult> GetAllInstitutions()

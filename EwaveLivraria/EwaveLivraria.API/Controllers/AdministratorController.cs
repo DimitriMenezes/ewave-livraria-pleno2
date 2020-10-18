@@ -23,7 +23,7 @@ namespace EwaveLivraria.API.Controllers
         //[Authorize(Roles = "User")]      
 
         //Como Administrador sem cadastro
-        //Quero Criar meu cadastro
+        //Quero criar meu cadastro
         //Assume-se que existe algum mecanismo de aprovação do cadastro do Admin
         [HttpPost]
         public async Task<IActionResult> CreateAdministrator(AdministratorRequest request)
@@ -35,8 +35,9 @@ namespace EwaveLivraria.API.Controllers
         }
 
         //Como Administrador
-        //Quero Editar meus dados
+        //Quero editar meus dados
         [HttpPut]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> UpdateAdministrator(AdministratorRequest request)
         {
             var result = await _administratorService.CreateAdministrator(request);

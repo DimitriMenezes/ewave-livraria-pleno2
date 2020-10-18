@@ -50,7 +50,18 @@ namespace EwaveLivraria.Services.Concrete
             if (!userValidator.IsValid)
                 return new ReturnModel { Errors = userValidator.Errors };
 
-            var user = _mapper.Map<User>(request);            
+            var institution = await _institutionRepository.GetById(request.InstitutionId);
+            if (!institution.IsActive)
+                return new ReturnModel { Errors = "Instituição Inativa." };
+
+            var user = await _userRepository.GetByCpf(request.Cpf);
+
+            user.Email = request.Email;
+            user.Name = request.Name;
+            user.InstitutionId = institution.Id;
+            if (user.Password != PasswordService.GeneratePassword(request.Password))
+                user.Password = PasswordService.GeneratePassword(user.Password);
+
             var result = await _userRepository.Update(user);
 
             return new ReturnModel { Data = _mapper.Map<UserModel>(result) };

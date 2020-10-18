@@ -32,8 +32,26 @@ namespace EwaveLivraria.Services.Concrete
             admin.Password = PasswordService.GeneratePassword(admin.Password);
             admin.RegisteredAt = DateTime.Now;
 
-            await _administratorRepository.Insert(admin);
-            return new ReturnModel { Data = 1};
+            var result = await _administratorRepository.Insert(admin);
+            return new ReturnModel { Data = _mapper.Map<AdministratorModel>(result) };
+        }
+
+        public async Task<ReturnModel> UpdateAdministrator(AdministratorRequest request)
+        {
+            var adminValidator = new AdministratorValidator().Validate(request);
+            if (!adminValidator.IsValid)
+                return new ReturnModel { Errors = adminValidator.Errors };
+
+            var admin = await _administratorRepository.GetByCpf(request.Cpf);
+            if(admin == null)
+                return new ReturnModel { Errors = "Administrador Não existe" };
+
+            if(admin.Password != PasswordService.GeneratePassword(request.Password))           
+                admin.Password = PasswordService.GeneratePassword(admin.Password);
+
+            admin.Name = request.Name;
+            var result = await _administratorRepository.Update(admin);
+            return new ReturnModel { Data = _mapper.Map<AdministratorModel>(result) };
         }
     }
 }

@@ -13,7 +13,8 @@ namespace EwaveLivraria.Services.IoC
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAdministratorService, AdministratorService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();            
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IInstitutionService, InstitutionService>();
         }
     }
 }

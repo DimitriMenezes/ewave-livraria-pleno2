@@ -8,6 +8,5 @@ namespace EwaveLivraria.Services.Model.Response
     {
         public object Data { get; set; }
         public object Errors { get; set; }
-
     }
 }

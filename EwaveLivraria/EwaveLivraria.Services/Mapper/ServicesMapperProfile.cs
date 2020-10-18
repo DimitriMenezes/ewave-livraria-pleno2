@@ -16,11 +16,13 @@ namespace EwaveLivraria.Services.Mapper
             CreateMap<UserRequest, User>();
             CreateMap<AddressRequest, Address>();
             CreateMap<AdministratorRequest, Administrator>();
+            CreateMap<InstitutionRequest, Institution>();
 
-            //Entity to Model
+            //Entity to Result Model
             CreateMap<User, UserModel>();
             CreateMap<Address, AddressModel>();
-            CreateMap<Administrator, AdministratorRequest>();
+            CreateMap<Administrator, AdministratorModel>();
+            CreateMap<Institution, InstitutionModel>();
         }
     }
 }

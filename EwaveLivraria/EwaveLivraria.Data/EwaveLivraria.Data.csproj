@@ -9,8 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\Abstract\" />
-    <Folder Include="Repositories\Concrete\" />
+    <ProjectReference Include="..\EwaveLivraria.Domain\EwaveLivraria.Domain.csproj" />
   </ItemGroup>
 
 </Project>

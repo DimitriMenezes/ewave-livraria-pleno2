@@ -5,6 +5,8 @@ using System.Text;
 using EwaveLivraria.Data.IoC;
 using EwaveLivraria.Services.IoC;
 using EwaveLivraria.Services.Settings;
+using AutoMapper;
+using EwaveLivraria.Services.Mapper;
 
 namespace EwaveLivraria.API.IoC
 {
@@ -12,13 +14,13 @@ namespace EwaveLivraria.API.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            //var mappingConfig = new MapperConfiguration(mc =>
-            //{
-            //    mc.AddProfile(new ServicesMapperProfile());
-            //});
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ServicesMapperProfile());
+            });
 
-            //IMapper mapper = mappingConfig.CreateMapper();
-            //services.AddSingleton(mapper);
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             RepositoriesInjector.RegisterServices(services);
             ServicesInjector.RegisterServices(services);

@@ -13,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Mapper\" />
+    <ProjectReference Include="..\EwaveLivraria.Data\EwaveLivraria.Data.csproj" />
   </ItemGroup>
 
 </Project>

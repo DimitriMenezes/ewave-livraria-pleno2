@@ -5,8 +5,7 @@ using System.Text;
 namespace EwaveLivraria.Services.Model.Request
 {
     public class AddressRequest
-    {
-        public string Country { get; set; }
+    {        
         public string Street { get; set; }
         public string Number { get; set; }
         public string Complement { get; set; }

@@ -21,17 +21,16 @@ namespace EwaveLivraria.Data.Repositories.Concrete
             return _dbSet.FirstOrDefaultAsync(i=> i.Isbn == isbn);
         }
 
-        public Task<List<Book>> GetWithFilter(string isbn, string author, string title, string genre)
+        public Task<List<Book>> GetWithFilter(string filter)
         {
             var query = _dbSet.AsQueryable();
-            if (!string.IsNullOrEmpty(isbn))
-                query = query.Where(i => i.Isbn == isbn);
-            if (!string.IsNullOrEmpty(author))
-                query = query.Where(i => i.Author.Contains(author));
-            if (!string.IsNullOrEmpty(title))
-                query = query.Where(i => i.Title.Contains(title));
-            if (!string.IsNullOrEmpty(genre))
-                query = query.Where(i => i.Genre.Contains(genre));
+            if (!string.IsNullOrEmpty(filter))
+                query = query.Where(i => i.Isbn.Contains(filter) 
+                    || i.Author.Contains(filter)
+                    || i.Title.Contains(filter)
+                    || i.Genre.Contains(filter)
+                    ) ;            
+            
             return query.ToListAsync();
         }
     }

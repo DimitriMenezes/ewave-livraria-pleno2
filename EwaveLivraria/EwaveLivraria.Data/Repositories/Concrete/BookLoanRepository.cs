@@ -24,14 +24,13 @@ namespace EwaveLivraria.Data.Repositories.Concrete
                 .Include(i => i.User);
         }
 
-        public Task<List<BookLoan>> FilterBookLoan(string userCpf, string bookTitle, 
-            BookLoanStatus status = BookLoanStatus.BookLoanInProgress)
+        public Task<List<BookLoan>> FilterBookLoan(string filter, BookLoanStatus status = BookLoanStatus.BookLoanInProgress)
         {
             var query = Include();
-            if (!string.IsNullOrEmpty(userCpf))
-                query = query.Where(i => i.User.Cpf == userCpf);
-            if (!string.IsNullOrEmpty(bookTitle))
-                query = query.Where(i => i.Book.Title.Contains(bookTitle));
+            if (!string.IsNullOrEmpty(filter))
+                query = query.Where(i => i.User.Cpf.Contains(filter)
+                || i.Book.Title.Contains(filter));
+          
             query = query.Where(i => i.LoanStatusId == (int) status);
 
             return query.ToListAsync();

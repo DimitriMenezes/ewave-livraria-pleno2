@@ -75,7 +75,8 @@ namespace EwaveLivraria.Services.Concrete
             if(bookReservation != null)
             {
                 bookReservation.LoanStatusId = (int) BookLoanStatus.BookLoanInProgress;
-                return new ReturnModel { Data = _mapper.Map<BookLoanModel>(bookReservation) };
+                var result = await _bookLoanRepository.Update(bookReservation);
+                return new ReturnModel { Data = _mapper.Map<BookLoanModel>(result) };
             }
             else
             {
@@ -94,9 +95,15 @@ namespace EwaveLivraria.Services.Concrete
         }
 
         public async Task<ReturnModel> ReturnBook(int bookLoanId)
-        {
-            //Atualizar o estoque após a devolução
+        {            
             var bookLoan = await _bookLoanRepository.GetById(bookLoanId);
+            if (bookLoan == null)
+                return new ReturnModel { Errors = "Empréstimo não encontrado" };
+            if (bookLoan.LoanStatusId == (int) BookLoanStatus.BookReserved ||
+                bookLoan.LoanStatusId == (int) BookLoanStatus.BookReturned)
+                return new ReturnModel { Errors = "Empréstimo já encerrado ou ainda não iniciado." };
+
+            //Atualizar o estoque após a devolução
             var bookInventory = await _bookInventoryRepository.GetByBookId(bookLoan.Book.Id);
             bookInventory.Quantity += 1;
             await _bookInventoryRepository.Update(bookInventory);
@@ -111,10 +118,10 @@ namespace EwaveLivraria.Services.Concrete
             return new ReturnModel { Data = _mapper.Map<BookLoanModel>(result) };
         }
 
-        public async Task<ReturnModel> FilterBookLoans(BookLoanSearchRequest request)
+        public async Task<ReturnModel> FilterBookLoans(string filter, int statusId)
         {
             var status = BookLoanStatus.BookLoanInProgress;
-            switch (request.StatusId)
+            switch (statusId)
             {
                 case 1:
                     status = BookLoanStatus.BookReserved; 
@@ -130,7 +137,7 @@ namespace EwaveLivraria.Services.Concrete
                     break;
             }
 
-            var bookLoans = await _bookLoanRepository.FilterBookLoan(request.UserCpf, request.BookTitle, status);
+            var bookLoans = await _bookLoanRepository.FilterBookLoan(filter, status);
             return new ReturnModel { Data = _mapper.Map<List<BookLoanModel>>(bookLoans)};
         }
 
@@ -162,6 +169,8 @@ namespace EwaveLivraria.Services.Concrete
         private async Task<(bool condition, string errorMsg)> HasBookAvailableAndActive(int bookId)
         {
             var bookInventory = await _bookInventoryRepository.GetByBookId(bookId);
+            if(bookInventory == null)
+                return (false, "Livro não encontrado");
 
             if (bookInventory.Quantity == 0)
                 return (false, "Livro não disponível no estoque");

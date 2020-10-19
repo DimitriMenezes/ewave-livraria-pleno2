@@ -29,9 +29,15 @@ namespace EwaveLivraria.Services.Concrete
             if (!institutionValidator.IsValid)
                 return new ReturnModel { Errors = institutionValidator.Errors };
 
-            var institution = _mapper.Map<Institution>(request);
+            var institution = await _institutionRepository.GetByCnpj(request.Cnpj);
+            if (institution != null)
+                return new ReturnModel { Errors = "CNPJ já utilizado por outra Instituição" };
 
-            var result = _institutionRepository.Insert(institution);
+            institution = _mapper.Map<Institution>(request);
+            institution.RegisteredAt = DateTime.Now;
+            institution.IsActive = true;
+
+            var result = await _institutionRepository.Insert(institution);
 
             return new ReturnModel { Data = _mapper.Map<InstitutionModel>(result) };
         }
@@ -48,7 +54,7 @@ namespace EwaveLivraria.Services.Concrete
 
             institution.Name = request.Name;
 
-            var result = _institutionRepository.Update(institution);
+            var result = await _institutionRepository.Update(institution);
 
             return new ReturnModel { Data = _mapper.Map<InstitutionModel>(result) };
 
@@ -59,7 +65,9 @@ namespace EwaveLivraria.Services.Concrete
             var institution = await _institutionRepository.GetById(id);
             institution.IsActive = false;
 
-            return new ReturnModel { Data = _mapper.Map<InstitutionModel>(institution) };
+            var result = await _institutionRepository.Update(institution);
+
+            return new ReturnModel { Data = _mapper.Map<InstitutionModel>(result) };
         }
 
         public async Task<ReturnModel> GetAllInstitutions()

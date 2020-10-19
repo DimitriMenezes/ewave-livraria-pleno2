@@ -23,7 +23,7 @@ namespace EwaveLivraria.Services.Concrete
         }
         public async Task<ReturnModel> AdminLogin(LoginRequest request)
         {
-            var admin = await _administratorRepository.GetByEmail(request.Email);
+            var admin = await _administratorRepository.GetByCpf(request.Cpf);
             if (admin == null)
                 return new ReturnModel { Errors = "Usuário Inexistente" };
 
@@ -39,7 +39,7 @@ namespace EwaveLivraria.Services.Concrete
 
         public async Task<ReturnModel> UserLogin(LoginRequest request)
         {            
-            var user = await _userRepository.GetByEmail(request.Email);
+            var user = await _userRepository.GetByCpf(request.Cpf);
                         
             if (user == null)
                 return new ReturnModel { Errors = "Usuário Inexistente" };

@@ -40,7 +40,7 @@ namespace EwaveLivraria.API.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> UpdateAdministrator(AdministratorRequest request)
         {
-            var result = await _administratorService.CreateAdministrator(request);
+            var result = await _administratorService.UpdateAdministrator(request);
             if (result.Errors != null)
                 return BadRequest(result.Errors);
             return Ok(result.Data);

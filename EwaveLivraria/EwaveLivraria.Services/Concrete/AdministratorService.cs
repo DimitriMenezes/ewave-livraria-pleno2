@@ -28,7 +28,11 @@ namespace EwaveLivraria.Services.Concrete
             if (!adminValidator.IsValid)
                 return new ReturnModel { Errors = adminValidator.Errors };
 
-            var admin = _mapper.Map<Administrator>(request);
+            var admin = await _administratorRepository.GetByCpf(request.Cpf);
+            if (admin != null)
+                return new ReturnModel { Errors = "CPF já utilizado por outro Administrador" };
+
+            admin = _mapper.Map<Administrator>(request);
             admin.Password = PasswordService.GeneratePassword(admin.Password);
             admin.RegisteredAt = DateTime.Now;
 

@@ -31,7 +31,11 @@ namespace EwaveLivraria.Services.Concrete
             if (!bookValidator.IsValid)
                 return new ReturnModel { Errors = bookValidator.Errors };
 
-            var book = _mapper.Map<Book>(request);
+            var book = await _bookRepository.GetByIsbn(request.Isbn);
+            if (book != null)
+                return new ReturnModel { Errors = "ISBN já utilizado em outro Livro" };
+
+            book = _mapper.Map<Book>(request);
             book.IsActive = true;
             book.RegisteredAt = DateTime.Now;
 
@@ -71,9 +75,9 @@ namespace EwaveLivraria.Services.Concrete
             return new ReturnModel { Data = bookModel };
         }
 
-        public async Task<ReturnModel> GetBooks(BookSearchRequest request)
+        public async Task<ReturnModel> GetBooks(string filter)
         {
-            var bookList = await _bookRepository.GetWithFilter(request.Isbn, request.Author, request.Title, request.Genre);
+            var bookList = await _bookRepository.GetWithFilter(filter);
                         
             return new ReturnModel { Data = _mapper.Map<List<BookModel>>(bookList) };
         }

@@ -24,13 +24,19 @@ namespace EwaveLivraria.API.Controllers
         //Como Administrador
         //Quero Obter Listagem de todos os empréstimos
         //Com filtros: Usuário, Título do Livro, Status do Empréstimo
+        //Status do Empréstimo
+        //1 - Livro Reservado
+        //2 - Empréstimo em andamento
+        //3 - Devolução em Atraso
+        //4 - Livro Devolvido
+
         [HttpGet]
         [Route("")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult> GetAllBookLoans(BookLoanSearchRequest request)
+        public async Task<ActionResult> GetAllBookLoans(string filter, int loanStatus = 2)
         {
 
-            var result = await _bookLoanService.FilterBookLoans(request);
+            var result = await _bookLoanService.FilterBookLoans(filter, loanStatus);
             if (result.Errors != null)
                 return BadRequest(result.Errors);
             return Ok(result.Data);

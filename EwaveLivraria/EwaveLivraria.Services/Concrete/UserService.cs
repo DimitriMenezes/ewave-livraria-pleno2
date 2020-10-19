@@ -36,9 +36,15 @@ namespace EwaveLivraria.Services.Concrete
             if (!institution.IsActive) 
                 return new ReturnModel { Errors = "Instituição Inativa." };
 
-            var user = _mapper.Map<User>(request);
+            var user = await _userRepository.GetByCpf(request.Cpf);
+            if (user != null)
+                return new ReturnModel { Errors = "CPF já utilizado por outro Usuário" };
 
+            user = _mapper.Map<User>(request);
+            user.RegisteredAt = DateTime.Now;
+            user.IsActive = true;
             user.Password = PasswordService.GeneratePassword(user.Password);
+
             var result = await _userRepository.Insert(user);
 
             return new ReturnModel { Data = _mapper.Map<UserModel>(result) };
@@ -55,6 +61,8 @@ namespace EwaveLivraria.Services.Concrete
                 return new ReturnModel { Errors = "Instituição Inativa." };
 
             var user = await _userRepository.GetByCpf(request.Cpf);
+            if (user == null)
+                return new ReturnModel { Errors = "Usuário não cadastrado" };
 
             var result = await UpdateEntity(user, request);
 
@@ -80,7 +88,7 @@ namespace EwaveLivraria.Services.Concrete
             if (user == null)
                 return new ReturnModel { Errors = "Usuario Não Existe" };
 
-            user.IsActive = true;
+            user.IsActive = false;
             user.BlockedUntil = DateTime.Now.AddDays(30);
 
             var result = await _userRepository.Update(user);

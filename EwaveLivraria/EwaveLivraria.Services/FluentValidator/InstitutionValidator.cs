@@ -18,7 +18,10 @@ namespace EwaveLivraria.Services.FluentValidator
                 .WithMessage("Informe o CNPJ.")
                 .IsCnpj();
 
-            new AddressValidator();
+            RuleFor(x => x.Address)
+                .NotNull()
+                .WithMessage("Informe Dados de Endereço")
+                .SetValidator(new AddressValidator());
         }
     }
 }

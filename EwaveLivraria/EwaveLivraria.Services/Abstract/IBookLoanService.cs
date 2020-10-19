@@ -11,8 +11,8 @@ namespace EwaveLivraria.Services.Abstract
     {
         Task<ReturnModel> BookReservation(BookLoanRequest request);
         Task<ReturnModel> CreateBookLoan(BookLoanRequest request);
-        Task<ReturnModel> ReturnBook(int bookLoanId);
-        Task<ReturnModel> FilterBookLoans(BookLoanSearchRequest request);
+        Task<ReturnModel> ReturnBook(int bookLoanId);        
+        Task<ReturnModel> FilterBookLoans(string filter, int statusId);
         Task<ReturnModel> GetBookLoan(int id);
     }
 }

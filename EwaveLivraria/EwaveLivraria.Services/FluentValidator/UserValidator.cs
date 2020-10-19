@@ -26,7 +26,10 @@ namespace EwaveLivraria.Services.FluentValidator
                 .WithMessage("Informe o CPF.")
                 .IsCpf();
 
-            new AddressValidator();
+            RuleFor(x => x.Address)
+                .NotNull()
+                .WithMessage("Informe Dados de Endereço")
+                .SetValidator(new AddressValidator());
         }
     }
 }

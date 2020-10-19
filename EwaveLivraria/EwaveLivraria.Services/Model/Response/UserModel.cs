@@ -15,5 +15,6 @@ namespace EwaveLivraria.Services.Model.Response
         public int InstitutionId { get; set; }
         public AddressModel Address { get; set; }
         public bool IsActive { get; set; }
+        public DateTime BlockedUntil { get; set; }
     }
 }

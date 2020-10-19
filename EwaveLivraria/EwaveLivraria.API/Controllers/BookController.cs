@@ -59,12 +59,12 @@ namespace EwaveLivraria.API.Controllers
         }
 
         //Como Usuário e Administrador
-        //Quero buscar livros por ISBN, Autor, Title, Genero
+        //Quero buscar livros por ISBN, Autor, Title ou Genero
         [HttpGet]
         [Authorize(Roles = "Administrator, User")]
-        public async Task<IActionResult> FilterBook(BookSearchRequest request)
+        public async Task<IActionResult> FilterBook(string filter)
         {
-            var result = await _bookService.GetBooks(request);           
+            var result = await _bookService.GetBooks(filter);           
             return Ok(result.Data);
         }
     }

@@ -9,6 +9,6 @@ namespace EwaveLivraria.Data.Repositories.Abstract
     public interface IBookRepository : IBaseRepository<Book>
     {
         Task<Book> GetByIsbn(string isbn);
-        Task<List<Book>> GetWithFilter(string isbn, string author, string title, string genre);
+        Task<List<Book>> GetWithFilter(string filter);
     }
 }

@@ -13,6 +13,6 @@ namespace EwaveLivraria.Services.Abstract
         Task<ReturnModel> UpdateBook(BookRequest request);        
         Task<ReturnModel> DiscontinueBook(int id);
         Task<ReturnModel> GetBook(int id);
-        Task<ReturnModel> GetBooks(BookSearchRequest request);
+        Task<ReturnModel> GetBooks(string filter);
     }
 }

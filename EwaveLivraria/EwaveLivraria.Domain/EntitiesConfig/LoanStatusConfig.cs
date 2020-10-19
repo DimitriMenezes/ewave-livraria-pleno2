@@ -15,7 +15,7 @@ namespace EwaveLivraria.Domain.EntitiesConfig
 
             builder
                  .Property(i => i.Name)
-                 .HasColumnType("varchar(20)")
+                 .HasColumnType("varchar(30)")
                  .IsRequired(true);
         }
     }

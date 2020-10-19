@@ -10,5 +10,6 @@ namespace EwaveLivraria.Data.Repositories.Abstract
     {
         Task<User> GetByCpf(string cpf);
         Task<User> GetByEmail(string email);
+        Task<List<User>> GetBlockedUsers();
     }
 }

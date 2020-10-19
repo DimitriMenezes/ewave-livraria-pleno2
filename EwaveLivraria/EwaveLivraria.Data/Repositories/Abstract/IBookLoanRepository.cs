@@ -12,5 +12,7 @@ namespace EwaveLivraria.Data.Repositories.Abstract
         Task<List<BookLoan>> FilterBookLoan(string filter, BookLoanStatus status = BookLoanStatus.BookLoanInProgress);
         Task<List<BookLoan>> GetBookLoansNotFinishedByUser(int userId);
         Task<BookLoan> GetBookReservations(int userId, int bookId);
+        Task<List<BookLoan>> GetBookLoansDelayed();
+        Task<List<BookLoan>> GetBookLoansInProgress();
     }
 }

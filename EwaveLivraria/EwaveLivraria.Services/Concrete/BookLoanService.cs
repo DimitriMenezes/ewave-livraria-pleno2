@@ -113,6 +113,7 @@ namespace EwaveLivraria.Services.Concrete
                 bookLoan.User.IsActive = false;
 
             bookLoan.LoanStatusId = (int)BookLoanStatus.BookReturned;
+            bookLoan.ReturnedDate = DateTime.Now;
             var result = await _bookLoanRepository.Update(bookLoan);
 
             return new ReturnModel { Data = _mapper.Map<BookLoanModel>(result) };

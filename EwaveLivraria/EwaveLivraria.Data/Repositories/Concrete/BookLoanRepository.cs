@@ -42,10 +42,21 @@ namespace EwaveLivraria.Data.Repositories.Concrete
                 .ToListAsync();
         }
 
+        public Task<List<BookLoan>> GetBookLoansInProgress()
+        {
+            return Include().Where(i => i.LoanStatusId == (int)BookLoanStatus.BookLoanInProgress)
+                .ToListAsync();
+        }
+
         public Task<BookLoan> GetBookReservations(int userId, int bookId)
         {
             return Include().FirstOrDefaultAsync(i => i.UserId == userId && i.BookId == bookId
                 && i.LoanStatusId == (int)BookLoanStatus.BookReserved);
+        }
+
+        public Task<List<BookLoan>> GetBookLoansDelayed()
+        {
+            return Include().Where(i => i.LoanStatusId == (int)BookLoanStatus.BookReturnDelayed).ToListAsync();
         }
     }
 }

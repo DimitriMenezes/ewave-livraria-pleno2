@@ -31,5 +31,10 @@ namespace EwaveLivraria.Data.Repositories.Concrete
         {
             return await _dbSet.FirstOrDefaultAsync(i => i.Email == email);
         }
+
+        public Task<List<User>> GetBlockedUsers()
+        {
+            return Include().Where(i => i.IsActive == false).ToListAsync();
+        }
     }
 }

@@ -34,6 +34,10 @@ namespace EwaveLivraria.Domain.EntitiesConfig
                 .Property(i => i.EndDate)
                 .HasColumnType("datetime")
                 .IsRequired(true);
+            builder
+              .Property(i => i.ReturnedDate)
+              .HasColumnType("datetime")
+              .IsRequired(false);
         }
     }
 }

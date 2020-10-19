@@ -10,6 +10,7 @@ namespace EwaveLivraria.Domain.Model
     {        
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
+        public DateTime? ReturnedDate { get; set; }
         public int UserId { get; set; }
         public int BookId { get; set; }
         public int LoanStatusId { get; set; }
